@@ -57,7 +57,7 @@ let g:tern_show_argument_hints = 'on_hold'
 let g:user_emmet_leader_key = '<c-e>'
 
 let mapleader = ','
-let maplocalleader = '\\'
+let maplocalleader = ',,'
 
 colorscheme solarized
 

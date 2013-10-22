@@ -4,9 +4,6 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWCOLORHINTS=1
 GIT_PS1_SHOWUPSTREAM="auto"
 
-source ~/.git-prompt.sh
-source ~/git-completion.bash
-
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -29,3 +26,6 @@ if [ -e /usr/share/terminfo/x/xterm-256color ]; then
 else
   export TERM='xterm-color'
 fi
+
+source ~/.git-prompt.sh
+source ~/git-completion.bash

@@ -1,0 +1,47 @@
+[user]
+	email = sdumas@yahoo-inc.com
+	name = shawndumas
+
+[help]
+	autocorrect = 5
+
+[push]
+	default = simple
+
+[color]
+	status = auto
+	branch = auto
+	ui = auto
+
+[core]
+	excludesfile = ~/.gitignore_global
+	trustctime = false
+	
+[alias]
+	lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative --graph
+        s = status -s
+        st = status
+        ci = commit
+        br = branch
+        co = checkout
+        rc = rebase --continue
+    
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+	
+[diff]
+	tool = Kaleidoscope
+	
+[difftool]
+	prompt = false
+	
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+	
+[mergetool]
+	prompt = false
+	keepBackup = false
+	
+[merge]
+	tool = Kaleidoscope

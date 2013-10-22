@@ -1,0 +1,27 @@
+set completion-ignore-case on
+set completion-prefix-display-length 2
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set completion-map-case on
+set expand-tilde on
+set visible-stats on
+
+set editing-mode vi
+$if mode=vi
+  set keymap vi-command
+  "\e[A": history-search-backward
+  "\e[B": history-search-forward
+  Control-l: clear-screen
+  Control-a: beginning-of-line
+  Control-e: end-of-line
+  Control-k: kill-line
+  set keymap vi-insert
+  "\e[A": history-search-backward
+  "\e[B": history-search-forward
+  Control-l: clear-screen
+  Control-a: beginning-of-line
+  Control-e: end-of-line
+  Control-k: kill-line
+$endif
+
+Space: magic-space

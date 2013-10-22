@@ -1,0 +1,4 @@
+vim/.vim/bundle
+node_modules
+*.swp
+%*

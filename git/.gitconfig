@@ -12,21 +12,26 @@
 
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = subl -n -w
-
+	
 [alias]
 	lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative --graph
     s = status -s
+    
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+	
 [diff]
 	tool = Kaleidoscope
+	
 [difftool]
 	prompt = false
+	
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
+	
 [mergetool]
 	prompt = false
+	
 [merge]
 	tool = Kaleidoscope

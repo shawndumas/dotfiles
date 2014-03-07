@@ -22,6 +22,7 @@ Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-line.git'
 Bundle 'kana/vim-textobj-syntax.git'
 Bundle 'kana/vim-textobj-user.git'
+Bundle 'kbarrette/mediummode'
 Bundle 'kien/ctrlp.vim'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'mattn/emmet-vim'
@@ -50,7 +51,6 @@ Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'wikitopian/hardmode'
 
 filetype plugin indent on
 
@@ -224,9 +224,6 @@ autocmd InsertLeave * set nopaste
 autocmd VimResized * :wincmd =
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 if exists('$TMUX')
   set ttymouse=xterm2

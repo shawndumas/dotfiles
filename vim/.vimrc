@@ -201,6 +201,7 @@ vmap < <gv
 
 " plugin settings
 let g:ctrlp_match_window = 'order:ttb,max:20'
+let g:ctrlp_root_markers = ['.ctrlp']
 let g:NERDSpaceDelims=1
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher

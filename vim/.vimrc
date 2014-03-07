@@ -2,56 +2,66 @@ set nocompatible
 
 syntax enable
 
-" vundle settings -- begin
 filetype on
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" vundle bundles -- begin
-Bundle 'Raimondi/delimitMate'
-Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
-Bundle 'bling/vim-bufferline'
+Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'gmarik/vundle'
+Bundle 'gregsexton/gitv'
+Bundle 'groenewege/vim-less'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'justinmk/vim-sneak'
+Bundle 'kana/vim-textobj-datetime'
+Bundle 'kana/vim-textobj-entire.git'
+Bundle 'kana/vim-textobj-indent.git'
+Bundle 'kana/vim-textobj-line.git'
+Bundle 'kana/vim-textobj-syntax.git'
+Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'mattn/emmet-vim'
 Bundle 'mileszs/ack.vim'
-Bundle 'moll/vim-bbye'
 Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'nelstrom/vim-qargs.git'
 Bundle 'osyo-manga/vim-over'
 Bundle 'pangloss/vim-javascript'
+Bundle 'Raimondi/delimitMate'
+Bundle 'rizzatti/dash.vim'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'schickling/vim-bufonly'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
+Bundle 'SirVer/ultisnips'
 Bundle 'sjl/gundo.vim'
-Bundle 'terryma/vim-multiple-cursors'
+Bundle 'tommcdo/vim-exchange'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-projectile'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
-" vundle bundles -- end
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'wikitopian/hardmode'
 
 filetype plugin indent on
-" vundle settings -- end
 
-" integration of UltiSnips and YCM -- begin
-let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
-" integration of UltiSnips and YCM -- end
-
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#fnamecollapse = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
-let g:bufferline_echo = 0
-let g:bufferline_show_bufnr = 0
+let g:fugitive_github_domains = ['https://git.corp.yahoo.com']
+let g:indent_guides_guide_size=1
+let g:indent_guides_start_level=2
 let g:markdown_fenced_languages = ['js=javascript', 'javascript', 'css', 'json=javascript']
 let g:mustache_abbreviations = 1
 let g:syntastic_auto_jump = 1
@@ -67,6 +77,8 @@ let g:syntastic_warning_symbol = '❕'
 let g:tern_map_keys = 1
 let g:tern_show_argument_hints = 'on_hold'
 let g:user_emmet_leader_key = '<c-e>'
+let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
+let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
 
 let mapleader = ' '
 let maplocalleader = '  '
@@ -132,16 +144,6 @@ nmap <leader>f :NERDTreeFind<cr>
 nmap <leader>p :CtrlP<cr>
 nmap <leader>r :CtrlPMRUFiles<cr>
 
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <leader>nt :call NumberToggle()<cr>
-
 if has("unix")
   let s:uname = system("uname")
   if s:uname == "Darwin\n"
@@ -187,10 +189,9 @@ nnoremap <leader>gp :Git push<cr>
 nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>gs :Git status -sb<cr>
 nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>gt :Gbrowse<cr>
 
-nnoremap  <leader>bd :Bdelete<cr>
-
-nnoremap <silent> <C-l> :<C-u>nohlsearch<cr><C-l>
+nnoremap <silent> <F5> :<C-u>nohlsearch<cr><C-l>
 nnoremap Y y$
 
 map j gj
@@ -218,11 +219,14 @@ autocmd BufEnter *gitconfig setf gitconfig
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd BufEnter *.json setl filetype=javascript
 autocmd BufEnter *.less setl filetype=less
-autocmd BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
+autocmd BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=mustache
 autocmd InsertLeave * set nopaste
 autocmd VimResized * :wincmd =
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 if exists('$TMUX')
   set ttymouse=xterm2
@@ -246,3 +250,13 @@ function! s:VSetSearch()
 endfunction
 
 match Error /\s\+$/
+
+" 2-character Sneak (default)
+nmap \ <Plug>Sneak_s
+nmap <bar> <Plug>Sneak_S
+" visual-mode
+xmap \ <Plug>Sneak_s
+xmap <bar> <Plug>Sneak_S
+" operator-pending-mode
+omap \ <Plug>Sneak_s
+omap <bar> <Plug>Sneak_S

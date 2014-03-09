@@ -257,3 +257,6 @@ xmap <bar> <Plug>Sneak_S
 " operator-pending-mode
 omap \ <Plug>Sneak_s
 omap <bar> <Plug>Sneak_S
+
+nnoremap cao *``cgn
+nnoremap caO #``cgN

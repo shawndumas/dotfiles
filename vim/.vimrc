@@ -33,6 +33,7 @@ Bundle 'nelstrom/vim-qargs.git'
 Bundle 'osyo-manga/vim-over'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Raimondi/delimitMate'
+Bundle 'reedes/vim-wordy'
 Bundle 'rizzatti/dash.vim'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'schickling/vim-bufonly'
@@ -53,17 +54,18 @@ Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'Yggdroot/indentLine'
 
 filetype plugin indent on
 
-let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamecollapse = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 let g:fugitive_github_domains = ['https://git.corp.yahoo.com']
-let g:indent_guides_guide_size=1
-let g:indent_guides_start_level=2
+let g:indentLine_char = '│'
+let g:indentLine_color_term = 16
 let g:markdown_fenced_languages = ['js=javascript', 'javascript', 'css', 'json=javascript']
 let g:mustache_abbreviations = 1
 let g:syntastic_auto_jump = 1
@@ -263,3 +265,18 @@ omap <bar> <Plug>Sneak_S
 
 nnoremap cao *``cgn
 nnoremap caO #``cgN
+
+function! QuickFixOpenAll()
+  if empty(getqflist())
+    return
+  endif
+  let s:prev_val = ""
+  for d in getqflist()
+    let s:curr_val = bufname(d.bufnr)
+    if (s:curr_val != s:prev_val)
+      exec "edit " . s:curr_val
+    endif
+    let s:prev_val = s:curr_val
+  endfor
+endfunction
+command! QuickFixOpenAll call QuickFixOpenAll()

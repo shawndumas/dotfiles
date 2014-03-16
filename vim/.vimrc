@@ -68,6 +68,7 @@ let g:indentLine_char = '│'
 let g:indentLine_color_term = 16
 let g:markdown_fenced_languages = ['js=javascript', 'javascript', 'css', 'json=javascript']
 let g:mustache_abbreviations = 1
+let g:sneak#streak = 1
 let g:syntastic_auto_jump = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_echo_current_error = 1

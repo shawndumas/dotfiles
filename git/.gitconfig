@@ -1,47 +1,55 @@
 [user]
-	email = sdumas@yahoo-inc.com
-	name = shawndumas
+  email = sdumas@yahoo-inc.com
+  name = shawndumas
 
 [help]
-	autocorrect = 5
+  autocorrect = 5
 
 [push]
-	default = simple
+  default = simple
 
 [color]
-	status = auto
-	branch = auto
-	ui = auto
+  status = auto
+  branch = auto
+  ui = auto
 
 [core]
-	excludesfile = ~/.gitignore_global
-	trustctime = false
-	
+  excludesfile = ~/.gitignore_global
+  trustctime = false
+
 [alias]
-	lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative --graph
-        s = status -s
-        st = status
-        ci = commit
-        br = branch
-        co = checkout
-        rc = rebase --continue
-    
+  lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative --graph
+  s = status -s
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  rc = rebase --continue
+  dc = diff --cached
+  prune-all = !git remote | xargs -n 1 git remote prune
+  edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; vim `f`"
+  add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
+  alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias>'"
+  aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+
 [difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-	
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
 [diff]
-	tool = Kaleidoscope
-	
+  tool = Kaleidoscope
+
 [difftool]
-	prompt = false
-	
+  prompt = false
+
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
-	
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
+
 [mergetool]
-	prompt = false
-	keepBackup = false
-	
+  prompt = false
+  keepBackup = false
+
 [merge]
-	tool = Kaleidoscope
+  tool = Kaleidoscope
+[rerere]
+  enabled = 1

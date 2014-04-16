@@ -115,7 +115,7 @@ set nowritebackup
 set nrformats=
 set number
 set ruler
-set scrolloff=3
+set scrolloff=0
 set shiftwidth=2
 set showbreak=⤿
 set showcmd
@@ -282,3 +282,13 @@ function! QuickFixOpenAll()
   endfor
 endfunction
 command! QuickFixOpenAll call QuickFixOpenAll()
+
+nnoremap G Gzz
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap } }zz
+nnoremap { {zz}}
+nnoremap ]c ]czz
+nnoremap [c [czz]]
+
+no / /\v

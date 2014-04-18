@@ -133,6 +133,7 @@ set ttimeout
 set ttimeoutlen=50
 set ttyfast
 set visualbell
+set wildignorecase
 set wildignore=log/**,node_modules/**,target/**,tmp/**
 set wildmenu
 set wildmode=longest,list,full

@@ -55,6 +55,7 @@ Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'Wolfy87/vim-enmasse'
 Bundle 'Yggdroot/indentLine'
 
 filetype plugin indent on
@@ -137,7 +138,7 @@ set wildignorecase
 set wildignore=log/**,node_modules/**,target/**,tmp/**
 set wildmenu
 set wildmode=longest,list,full
-set wrap
+set nowrap
 
 vnoremap <silent> <Enter> :EasyAlign<Enter>
 nnoremap ? :<C-u>OverCommandLine<cr>

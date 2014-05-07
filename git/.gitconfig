@@ -47,18 +47,8 @@
   prompt = false
 
 [merge]
-  tool = Kaleidoscope
   algorithm = patience
   strategy = recursive
 
-[mergetool "Kaleidoscope"]
-  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-  trustExitCode = true
-
 [diff]
-  tool = Kaleidoscope
   algorithm = patience
-
-[difftool "Kaleidoscope"]
-  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-

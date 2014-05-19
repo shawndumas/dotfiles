@@ -1,4 +1,6 @@
 vim/.vim/bundle
+vim/.vim/spell
+.netrwhist
 node_modules
 *.swp
 *%*

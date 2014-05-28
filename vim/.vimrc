@@ -203,6 +203,7 @@ nnoremap <leader>gs :Git status -sb<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>gt :Gbrowse<cr>
 
+onoremap w :execute 'normal! '.v:count1.'w'<CR>
 nnoremap <silent> <F5> :<C-u>nohlsearch<cr><C-l>
 nnoremap Y y$
 

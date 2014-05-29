@@ -32,24 +32,33 @@
   alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias>'"
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 
-[difftool "Kaleidoscope"]
-  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[rerere]
+  enabled = 1
 
-[diff]
-  tool = Kaleidoscope
-
-[difftool]
-  prompt = false
-
-[mergetool "Kaleidoscope"]
-  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-  trustExitCode = true
+[pull]
+  ff = only
+  rebase = true
 
 [mergetool]
   prompt = false
   keepBackup = false
 
+[difftool]
+  prompt = false
+
 [merge]
   tool = Kaleidoscope
-[rerere]
-  enabled = 1
+  algorithm = patience
+  strategy = recursive
+
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
+
+[diff]
+  tool = Kaleidoscope
+  algorithm = patience
+
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+

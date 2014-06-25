@@ -9,7 +9,6 @@ call vundle#begin()
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
@@ -30,13 +29,9 @@ Plugin 'mattn/emmet-vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'nelstrom/vim-qargs.git'
 Plugin 'osyo-manga/vim-over'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Raimondi/delimitMate'
-Plugin 'reedes/vim-wordy'
-Plugin 'rizzatti/dash.vim'
-Plugin 'rizzatti/funcoo.vim'
 Plugin 'schickling/vim-bufonly'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -148,7 +143,7 @@ vnoremap <silent> <Enter> :EasyAlign<Enter>
 nnoremap ? :<C-u>OverCommandLine<cr>
 
 nmap <leader>G :GundoToggle<cr>
-nmap <leader>P :CtrlPClearCache<cr>:CtrlP<cr>
+nmap <leader>P :CtrlPClearAllCaches<cr>:CtrlP<cr>
 nmap <leader>a :Ack<space>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>d :NERDTreeToggle<cr>
@@ -162,36 +157,6 @@ if has("unix")
     nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
   endif
 endif
-
-" Change tabstop, softtabstop and shiftwidth to the same value
-function! ChangeTabs()
-  let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
-  if l:tabstop > 0
-    let &l:sts = l:tabstop
-    let &l:ts = l:tabstop
-    let &l:sw = l:tabstop
-  endif
-  call SummarizeTabs()
-endfunction
-
-function! SummarizeTabs()
-  try
-    echohl ModeMsg
-    echon 'tabstop='.&l:ts
-    echon ' shiftwidth='.&l:sw
-    echon ' softtabstop='.&l:sts
-    if &l:et
-      echon ' expandtab'
-    else
-      echon ' noexpandtab'
-    endif
-  finally
-    echohl None
-  endtry
-endfunction
-
-nnoremap <leader>ct :call ChangeTabs()<cr>
-nnoremap <leader>st :call SummarizeTabs()<cr>
 
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gc :Gcommit<cr>
@@ -239,15 +204,6 @@ autocmd VimResized * :wincmd =
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
 
-if exists('$TMUX')
-  set ttymouse=xterm2
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
 set undodir=~/.vim/backups
 set undofile
 
@@ -274,21 +230,6 @@ omap <bar> <Plug>Sneak_S
 
 nnoremap cao *``cgn
 nnoremap caO #``cgN
-
-function! QuickFixOpenAll()
-  if empty(getqflist())
-    return
-  endif
-  let s:prev_val = ""
-  for d in getqflist()
-    let s:curr_val = bufname(d.bufnr)
-    if (s:curr_val != s:prev_val)
-      exec "edit " . s:curr_val
-    endif
-    let s:prev_val = s:curr_val
-  endfor
-endfunction
-command! QuickFixOpenAll call QuickFixOpenAll()
 
 nnoremap G Gzz
 nnoremap n nzz

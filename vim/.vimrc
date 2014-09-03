@@ -254,3 +254,4 @@ function! RemoveFancyCharacters()
 endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
+set suffixesadd+=.js

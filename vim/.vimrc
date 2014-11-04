@@ -207,6 +207,8 @@ autocmd WinLeave * set nocursorline
 
 set undodir=~/.vim/backups
 set undofile
+set undolevels=1000
+set undoreload=10000
 
 xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>

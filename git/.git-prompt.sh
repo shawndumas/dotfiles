@@ -60,6 +60,7 @@
 # of values:
 #
 #     verbose       show number of commits ahead/behind (+/-) upstream
+#     name          if verbose, then also show the upstream abbrev name
 #     legacy        don't use the '--count' option available in recent
 #                   versions of git-rev-list
 #     git           always compare HEAD to @{upstream}
@@ -84,13 +85,17 @@
 # the colored output of "git status -sb" and are available only when
 # using __git_ps1 for PROMPT_COMMAND or precmd.
 
+# check whether printf supports -v
+__git_printf_supports_v=
+printf -v __git_printf_supports_v -- '%s' yes >/dev/null 2>&1
+
 # stores the divergence from upstream in $p
 # used by GIT_PS1_SHOWUPSTREAM
 __git_ps1_show_upstream ()
 {
 	local key value
 	local svn_remote svn_url_pattern count n
-	local upstream=git legacy="" verbose=""
+	local upstream=git legacy="" verbose="" name=""
 
 	svn_remote=()
 	# get some config options from git-config
@@ -106,7 +111,7 @@ __git_ps1_show_upstream ()
 			;;
 		svn-remote.*.url)
 			svn_remote[$((${#svn_remote[@]} + 1))]="$value"
-			svn_url_pattern+="\\|$value"
+			svn_url_pattern="$svn_url_pattern\\|$value"
 			upstream=svn+git # default upstream is SVN if available, else git
 			;;
 		esac
@@ -118,6 +123,7 @@ __git_ps1_show_upstream ()
 		git|svn) upstream="$option" ;;
 		verbose) verbose=1 ;;
 		legacy)  legacy=1  ;;
+		name)    name=1 ;;
 		esac
 	done
 
@@ -179,13 +185,13 @@ __git_ps1_show_upstream ()
 		"") # no upstream
 			p="" ;;
 		"0	0") # equal to upstream
-			p="👌 " ;;
+			p="=" ;;
 		"0	"*) # ahead of upstream
-			p="👉 " ;;
+			p=">" ;;
 		*"	0") # behind upstream
-			p="👈 " ;;
+			p="<" ;;
 		*)	    # diverged from upstream
-			p="👎 " ;;
+			p="<>" ;;
 		esac
 	else
 		case "$count" in
@@ -200,6 +206,18 @@ __git_ps1_show_upstream ()
 		*)	    # diverged from upstream
 			p=" u+${count#*	}-${count%	*}" ;;
 		esac
+		if [[ -n "$count" && -n "$name" ]]; then
+			__git_ps1_upstream_name=$(git rev-parse \
+				--abbrev-ref "$upstream" 2>/dev/null)
+			if [ $pcmode = yes ] && [ $ps1_expanded = yes ]; then
+				p="$p \${__git_ps1_upstream_name}"
+			else
+				p="$p ${__git_ps1_upstream_name}"
+				# not needed anymore; keep user's
+				# environment clean
+				unset __git_ps1_upstream_name
+			fi
+		fi
 	fi
 
 }
@@ -229,13 +247,13 @@ __git_ps1_colorize_gitstring ()
 	local branch_color=""
 	if [ $detached = no ]; then
 		branch_color="$ok_color"
-              else
+	else
 		branch_color="$bad_color"
 	fi
 	c="$branch_color$c"
 
 	z="$c_clear$z"
-	if [ "$w" = "✋ " ]; then
+	if [ "$w" = "*" ]; then
 		w="$bad_color$w"
 	fi
 	if [ -n "$i" ]; then
@@ -248,6 +266,13 @@ __git_ps1_colorize_gitstring ()
 		u="$bad_color$u"
 	fi
 	r="$c_clear$r"
+}
+
+__git_eread ()
+{
+	f="$1"
+	shift
+	test -r "$f" && read "$@" <"$f"
 }
 
 # __git_ps1 accepts 0 or 1 arguments (i.e., format string)
@@ -281,6 +306,43 @@ __git_ps1 ()
 		;;
 	esac
 
+	# ps1_expanded:  This variable is set to 'yes' if the shell
+	# subjects the value of PS1 to parameter expansion:
+	#
+	#   * bash does unless the promptvars option is disabled
+	#   * zsh does not unless the PROMPT_SUBST option is set
+	#   * POSIX shells always do
+	#
+	# If the shell would expand the contents of PS1 when drawing
+	# the prompt, a raw ref name must not be included in PS1.
+	# This protects the user from arbitrary code execution via
+	# specially crafted ref names.  For example, a ref named
+	# 'refs/heads/$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)' might cause the
+	# shell to execute 'sudo rm -rf /' when the prompt is drawn.
+	#
+	# Instead, the ref name should be placed in a separate global
+	# variable (in the __git_ps1_* namespace to avoid colliding
+	# with the user's environment) and that variable should be
+	# referenced from PS1.  For example:
+	#
+	#     __git_ps1_foo=$(do_something_to_get_ref_name)
+	#     PS1="...stuff...\${__git_ps1_foo}...stuff..."
+	#
+	# If the shell does not expand the contents of PS1, the raw
+	# ref name must be included in PS1.
+	#
+	# The value of this variable is only relevant when in pcmode.
+	#
+	# Assume that the shell follows the POSIX specification and
+	# expands PS1 unless determined otherwise.  (This is more
+	# likely to be correct if the user has a non-bash, non-zsh
+	# shell and safer than the alternative if the assumption is
+	# incorrect.)
+	#
+	local ps1_expanded=yes
+	[ -z "$ZSH_VERSION" ] || [[ -o PROMPT_SUBST ]] || ps1_expanded=no
+	[ -z "$BASH_VERSION" ] || shopt -q promptvars || ps1_expanded=no
+
 	local repo_info rev_parse_exit_code
 	repo_info="$(git rev-parse --git-dir --is-inside-git-dir \
 		--is-bare-repository --is-inside-work-tree \
@@ -312,9 +374,9 @@ __git_ps1 ()
 	local step=""
 	local total=""
 	if [ -d "$g/rebase-merge" ]; then
-		read b 2>/dev/null <"$g/rebase-merge/head-name"
-		read step 2>/dev/null <"$g/rebase-merge/msgnum"
-		read total 2>/dev/null <"$g/rebase-merge/end"
+		__git_eread "$g/rebase-merge/head-name" b
+		__git_eread "$g/rebase-merge/msgnum" step
+		__git_eread "$g/rebase-merge/end" total
 		if [ -f "$g/rebase-merge/interactive" ]; then
 			r="|REBASE-i"
 		else
@@ -322,10 +384,10 @@ __git_ps1 ()
 		fi
 	else
 		if [ -d "$g/rebase-apply" ]; then
-			read step 2>/dev/null <"$g/rebase-apply/next"
-			read total 2>/dev/null <"$g/rebase-apply/last"
+			__git_eread "$g/rebase-apply/next" step
+			__git_eread "$g/rebase-apply/last" total
 			if [ -f "$g/rebase-apply/rebasing" ]; then
-				read b 2>/dev/null <"$g/rebase-apply/head-name"
+				__git_eread "$g/rebase-apply/head-name" b
 				r="|REBASE"
 			elif [ -f "$g/rebase-apply/applying" ]; then
 				r="|AM"
@@ -349,7 +411,7 @@ __git_ps1 ()
 			b="$(git symbolic-ref HEAD 2>/dev/null)"
 		else
 			local head=""
-			if ! read head 2>/dev/null <"$g/HEAD"; then
+			if ! __git_eread "$g/HEAD" head; then
 				if [ $pcmode = yes ]; then
 					PS1="$ps1pc_start$ps1pc_end"
 				fi
@@ -398,23 +460,24 @@ __git_ps1 ()
 		if [ -n "${GIT_PS1_SHOWDIRTYSTATE-}" ] &&
 		   [ "$(git config --bool bash.showDirtyState)" != "false" ]
 		then
-			git diff --no-ext-diff --quiet --exit-code || w="✋ "
+			git diff --no-ext-diff --quiet --exit-code || w="*"
 			if [ -n "$short_sha" ]; then
-				git diff-index --cached --quiet HEAD -- || i="👆 "
+				git diff-index --cached --quiet HEAD -- || i="+"
 			else
-				i="👇 "
+				i="#"
 			fi
 		fi
 		if [ -n "${GIT_PS1_SHOWSTASHSTATE-}" ] &&
-		   [ -r "$g/refs/stash" ]; then
-			s="📦 "
+		   git rev-parse --verify --quiet refs/stash >/dev/null
+		then
+			s="$"
 		fi
 
 		if [ -n "${GIT_PS1_SHOWUNTRACKEDFILES-}" ] &&
 		   [ "$(git config --bool bash.showUntrackedFiles)" != "false" ] &&
 		   git ls-files --others --exclude-standard --error-unmatch -- '*' >/dev/null 2>/dev/null
 		then
-			u="🆕 ${ZSH_VERSION+%}"
+			u="%${ZSH_VERSION+%}"
 		fi
 
 		if [ -n "${GIT_PS1_SHOWUPSTREAM-}" ]; then
@@ -429,11 +492,17 @@ __git_ps1 ()
 		__git_ps1_colorize_gitstring
 	fi
 
+	b=${b##refs/heads/}
+	if [ $pcmode = yes ] && [ $ps1_expanded = yes ]; then
+		__git_ps1_branch_name=$b
+		b="\${__git_ps1_branch_name}"
+	fi
+
 	local f="$w$i$s$u"
-	local gitstring="$c${b##refs/heads/}${f:+$z$f}$r$p"
+	local gitstring="$c$b${f:+$z$f}$r$p"
 
 	if [ $pcmode = yes ]; then
-		if [[ -n ${ZSH_VERSION-} ]]; then
+		if [ "${__git_printf_supports_v-}" != yes ]; then
 			gitstring=$(printf -- "$printf_format" "$gitstring")
 		else
 			printf -v gitstring -- "$printf_format" "$gitstring"

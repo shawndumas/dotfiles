@@ -9,7 +9,6 @@ filetype off
 set rtp+=~/.nvim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'edkolev/promptline.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'bling/vim-airline'
@@ -259,10 +258,3 @@ endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
 set suffixesadd+=.js
-
-let g:promptline_preset = {
-        \'a' : [ promptline#slices#host() ],
-        \'b' : [ promptline#slices#user() ],
-        \'c' : [ promptline#slices#cwd() ],
-        \'y' : [ promptline#slices#vcs_branch(), promptline#slices#git_status() ],
-        \'warn' : [ promptline#slices#last_exit_code() ]}

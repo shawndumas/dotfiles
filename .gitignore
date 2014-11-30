@@ -1,3 +1,5 @@
+nvim/.nvim/bundle
+nvim/.nvim/spell
 vim/.vim/bundle
 vim/.vim/spell
 .netrwhist

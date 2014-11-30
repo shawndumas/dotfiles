@@ -1,12 +1,15 @@
-set nocompatible
+if has('nvim')
+  runtime! python_setup.vim
+endif
 
 syntax enable
 
 filetype on
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.nvim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'edkolev/promptline.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'bling/vim-airline'
@@ -62,7 +65,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamecollapse = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
-let g:fugitive_github_domains = ['https://github.com']
+let g:fugitive_github_domains = ['https://git.corp.yahoo.com']
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 16
 let g:markdown_fenced_languages = ['js=javascript', 'javascript', 'css', 'json=javascript']
@@ -96,10 +99,8 @@ set autoindent
 set autoread
 set background=dark
 set backspace=indent,eol,start
-set cryptmethod=blowfish
 set complete=.,w,b,u,t,i
-set directory=$HOME/.vim/swapfiles//,.,~/tmp,/var/tmp,/tmp
-set encoding=utf-8
+set directory=$HOME/.nvim/swapfiles//,.,~/tmp,/var/tmp,/tmp
 set expandtab
 set hidden
 set hlsearch
@@ -205,7 +206,7 @@ autocmd VimResized * :wincmd =
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
 
-set undodir=~/.vim/backups
+set undodir=~/.nvim/backups
 set undofile
 set undolevels=1000
 set undoreload=10000
@@ -258,3 +259,10 @@ endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
 set suffixesadd+=.js
+
+let g:promptline_preset = {
+        \'a' : [ promptline#slices#host() ],
+        \'b' : [ promptline#slices#user() ],
+        \'c' : [ promptline#slices#cwd() ],
+        \'y' : [ promptline#slices#vcs_branch(), promptline#slices#git_status() ],
+        \'warn' : [ promptline#slices#last_exit_code() ]}

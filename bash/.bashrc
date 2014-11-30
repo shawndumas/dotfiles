@@ -62,7 +62,10 @@ else
   source /etc/bash_completion.d/git
 fi
 
-PS1="\n💻 :\h 👤 :\u 📂 :\$PWD\$(__git_ps1 \"\n🐙 :%s\")\n💬  "
-
+source ~/.shell_prompt.sh
 source ~/.git-prompt.sh
+
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin

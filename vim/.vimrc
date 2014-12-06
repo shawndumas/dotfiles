@@ -27,6 +27,7 @@ Plugin 'kana/vim-textobj-user.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'mattn/emmet-vim'
+Plugin 'mhinz/vim-signify'
 Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -73,19 +74,25 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_echo_current_error = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = '❗'
+let g:syntastic_error_symbol = 'E'
 let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_style_error_symbol = '❗'
-let g:syntastic_style_warning_symbol = '❕'
-let g:syntastic_warning_symbol = '❕'
+let g:syntastic_style_error_symbol = 'E'
+let g:syntastic_style_warning_symbol = 'W'
+let g:syntastic_warning_symbol = 'W'
 let g:tern_map_keys = 1
 let g:tern_show_argument_hints = 'on_hold'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsEditSplit = 'vertical'
 let g:user_emmet_leader_key = '<c-e>'
 let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
 let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+let g:signify_vcs_list = ['git']
+let g:signify_sign_add = '⨁'
+let g:signify_sign_delete = '⨴'
+let g:signify_sign_delete_first_line = '⨂'
+let g:signify_sign_change = '⨸'
+let g:signify_sign_changedelete = '⨂'
 
 let mapleader = ' '
 let maplocalleader = '  '

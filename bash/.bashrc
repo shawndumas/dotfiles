@@ -21,7 +21,10 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias ls='ls -G'
 alias fn='find . -name'
-alias tmux="TERM=screen-256color-bce tmux"
+alias tmux='TERM=screen-256color-bce tmux'
+
+# the time has come...
+alias vim='nvim'
 
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend

@@ -23,9 +23,6 @@ alias ls='ls -G'
 alias fn='find . -name'
 alias tmux='TERM=screen-256color-bce tmux'
 
-# the time has come...
-alias vim='nvim'
-
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 

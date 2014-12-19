@@ -8,7 +8,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'bling/vim-airline'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'gmarik/Vundle.vim'
@@ -52,6 +51,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Wolfy87/vim-enmasse'
+Plugin 'Wolfy87/vim-expand'
 Plugin 'Yggdroot/indentLine'
 
 call vundle#end()
@@ -156,6 +156,7 @@ nmap <leader>d :NERDTreeToggle<cr>
 nmap <leader>f :NERDTreeFind<cr>
 nmap <leader>p :CtrlP<cr>
 nmap <leader>r :CtrlPMRUFiles<cr>
+nmap <leader>e :Expand<cr>
 
 if has("unix")
   let s:uname = system("uname")

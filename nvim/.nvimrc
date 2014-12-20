@@ -1,63 +1,64 @@
+if empty(glob('~/.nvim/autoload/plug.vim'))
+  silent !mkdir -p ~/.nvim/autoload
+  silent !curl -fLo ~/.nvim/autoload/plug.vim
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin('~/.nvim/plugged')
+
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'gregsexton/gitv', { 'on':  'Gitv' }
+Plug 'honza/vim-snippets'
+Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-sneak'
+Plug 'kana/vim-textobj-datetime'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-lastpat'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-syntax'
+Plug 'kana/vim-textobj-user'
+Plug 'kien/ctrlp.vim'
+Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'sass', 'less'] }
+Plug 'mhinz/vim-signify'
+Plug 'mileszs/ack.vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'osyo-manga/vim-over'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'Raimondi/delimitMate'
+Plug 'schickling/vim-bufonly'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/syntastic'
+Plug 'SirVer/ultisnips'
+Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-jdaddy'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-projectile'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'Wolfy87/vim-enmasse'
+Plug 'Wolfy87/vim-expand'
+Plug 'Yggdroot/indentLine'
+
+call plug#end()
+
 if has('nvim')
   runtime! python_setup.vim
 endif
-
 syntax enable
-
-filetype on
-filetype off
-set rtp+=~/.nvim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'gmarik/Vundle.vim'
-Plugin 'gregsexton/gitv'
-Plugin 'honza/vim-snippets'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'justinmk/vim-sneak'
-Plugin 'kana/vim-textobj-datetime'
-Plugin 'kana/vim-textobj-entire.git'
-Plugin 'kana/vim-textobj-indent.git'
-Plugin 'kana/vim-textobj-lastpat'
-Plugin 'kana/vim-textobj-line.git'
-Plugin 'kana/vim-textobj-syntax.git'
-Plugin 'kana/vim-textobj-user.git'
-Plugin 'kien/ctrlp.vim'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'mhinz/vim-signify'
-Plugin 'mileszs/ack.vim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'osyo-manga/vim-over'
-Plugin 'pangloss/vim-javascript'
-Plugin 'Raimondi/delimitMate'
-Plugin 'schickling/vim-bufonly'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
-Plugin 'sjl/gundo.vim'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-jdaddy'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-projectile'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Wolfy87/vim-enmasse'
-Plugin 'Wolfy87/vim-expand'
-Plugin 'Yggdroot/indentLine'
-
-call vundle#end()
-filetype plugin indent on
 
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#enabled = 1

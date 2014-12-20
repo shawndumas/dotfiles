@@ -48,7 +48,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'Valloric/YouCompleteMe'
 Plug 'Wolfy87/vim-enmasse'
 Plug 'Wolfy87/vim-expand'
 Plug 'Yggdroot/indentLine'

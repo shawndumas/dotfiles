@@ -7,7 +7,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
+Plug 'blerins/flattown'
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'gregsexton/gitv', { 'on':  'Gitv' }
@@ -96,11 +96,10 @@ let g:signify_sign_changedelete = '⨂'
 let mapleader = ' '
 let maplocalleader = '  '
 
-colorscheme solarized
+colorscheme flattown
 
 set autoindent
 set autoread
-set background=dark
 set backspace=indent,eol,start
 set cryptmethod=blowfish
 set complete=.,w,b,u,t,i
@@ -130,7 +129,7 @@ set showmatch
 set smartcase
 set smarttab
 set softtabstop=2
-set spell
+set nospell
 set spelllang=en_us
 set splitbelow
 set splitright

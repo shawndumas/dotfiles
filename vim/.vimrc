@@ -216,6 +216,7 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 
+xnoremap . :normal .<CR>
 xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
 function! s:VSetSearch()

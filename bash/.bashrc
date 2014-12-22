@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 shopt -s autocd
 shopt -s cdspell
 shopt -s checkjobs
@@ -9,12 +11,6 @@ shopt -s nocaseglob
 export GIT_EDITOR=vim
 export VISUAL=vim
 export EDITOR=vim
-
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWCOLORHINTS=1
-GIT_PS1_SHOWUPSTREAM="auto"
 
 alias rm='rm -i'
 alias cp='cp -i'
@@ -43,27 +39,27 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-if [[ $(type -P grunt) ]]; then
+if [ "$(type -P grunt)" ]; then
    eval "$(grunt --completion=bash)"
 fi
 
 if which brew >/dev/null 2>&1; then
-  if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-    . `brew --prefix`/etc/t-completion.sh
+  if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+    . "$(brew --prefix)/etc/bash_completion"
+    . "$(brew --prefix)/etc/t-completion.sh"
   fi
 
-  if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
-    . `brew --prefix`/Library/Contributions/brew_bash_completion.sh
+  if [ -f "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh" ]; then
+    . "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
   fi
 
   eval "$(rbenv init -)"
 else
-  source /etc/bash_completion.d/git
+  . /etc/bash_completion.d/git
 fi
 
-source ~/.shell_prompt.sh
-source ~/.git-prompt.sh
+. ~/.shell_prompt.sh
+. ~/.git-prompt.sh
 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home
 

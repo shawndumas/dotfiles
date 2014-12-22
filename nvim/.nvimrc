@@ -7,10 +7,10 @@ endif
 
 call plug#begin('~/.nvim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
+Plug 'blerins/flattown'
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'gregsexton/gitv', { 'on':  'Gitv' }
+Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'honza/vim-snippets'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
@@ -23,7 +23,7 @@ Plug 'kana/vim-textobj-syntax'
 Plug 'kana/vim-textobj-user'
 Plug 'kien/ctrlp.vim'
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'sass', 'less'] }
+Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css', 'sass', 'less' ] }
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'mustache/vim-mustache-handlebars'
@@ -32,7 +32,7 @@ Plug 'osyo-manga/vim-over'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'Raimondi/delimitMate'
 Plug 'schickling/vim-bufonly'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
@@ -98,11 +98,10 @@ let g:signify_sign_changedelete = '⨂'
 let mapleader = ' '
 let maplocalleader = '  '
 
-colorscheme solarized
+colorscheme flattown
 
 set autoindent
 set autoread
-set background=dark
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,i
 set directory=$HOME/.nvim/swapfiles//,.,~/tmp,/var/tmp,/tmp
@@ -130,7 +129,7 @@ set showmatch
 set smartcase
 set smarttab
 set softtabstop=2
-set spell
+set nospell
 set spelllang=en_us
 set splitbelow
 set splitright

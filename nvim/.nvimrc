@@ -226,6 +226,7 @@ function! s:VSetSearch()
   norm! gv"sy
   let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
   let @s = temp
+  normal ``
 endfunction
 
 match Error /\s\+$/

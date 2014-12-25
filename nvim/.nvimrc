@@ -178,6 +178,8 @@ nnoremap <leader>gt :Gbrowse<cr>
 onoremap w :execute 'normal! '.v:count1.'w'<CR>
 nnoremap <silent> <F5> :<C-u>nohlsearch<cr><C-l>
 nnoremap Y y$
+nnoremap * *``
+nnoremap # #``
 
 map j gj
 map k gk

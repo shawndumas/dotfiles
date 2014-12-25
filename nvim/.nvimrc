@@ -178,6 +178,8 @@ nnoremap <leader>gt :Gbrowse<cr>
 onoremap w :execute 'normal! '.v:count1.'w'<CR>
 nnoremap <silent> <F5> :<C-u>nohlsearch<cr><C-l>
 nnoremap Y y$
+nnoremap * *``
+nnoremap # #``
 
 map j gj
 map k gk
@@ -224,6 +226,7 @@ function! s:VSetSearch()
   norm! gv"sy
   let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
   let @s = temp
+  normal ``
 endfunction
 
 match Error /\s\+$/

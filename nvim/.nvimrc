@@ -229,6 +229,13 @@ function! s:VSetSearch()
   normal ``
 endfunction
 
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
 match Error /\s\+$/
 
 " 2-character Sneak (default)

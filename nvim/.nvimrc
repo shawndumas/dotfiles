@@ -1,8 +1,12 @@
+augroup vimrc
+  autocmd!
+augroup END
+
 if empty(glob('~/.nvim/autoload/plug.vim'))
   silent !mkdir -p ~/.nvim/autoload
   silent !curl -fLo ~/.nvim/autoload/plug.vim
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
+  autocmd vimrc VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.nvim/plugged')
@@ -55,9 +59,6 @@ Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
-if has('nvim')
-  runtime! python_setup.vim
-endif
 syntax enable
 
 let g:airline#extensions#tabline#buffer_min_count = 2
@@ -184,8 +185,8 @@ nnoremap # #``
 map j gj
 map k gk
 
-vmap > >gv
-vmap < <gv
+xnoremap > >gv
+xnoremap < <gv
 
 " plugin settings
 let g:ctrlp_match_window = 'order:ttb,max:20'
@@ -203,15 +204,18 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-autocmd BufEnter *gitconfig setf gitconfig
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-autocmd BufEnter *.json setl filetype=javascript
-autocmd BufEnter *.less setl filetype=less
-autocmd BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=mustache
-autocmd InsertLeave * set nopaste
-autocmd VimResized * :wincmd =
-autocmd WinEnter * set cursorline
-autocmd WinLeave * set nocursorline
+autocmd vimrc BufEnter *gitconfig setf gitconfig
+autocmd vimrc BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd vimrc BufEnter *.json setl filetype=javascript
+autocmd vimrc BufEnter *.less setl filetype=less
+autocmd vimrc BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=mustache
+autocmd vimrc InsertLeave * set nopaste
+autocmd vimrc VimResized * :wincmd =
+autocmd vimrc WinEnter * set cursorline
+autocmd vimrc WinLeave * set nocursorline
+autocmd vimrc FocusLost,BufLeave,WinLeave * call feedkeys("\<C-\>\<C-n>")
+autocmd vimrc FocusLost * let g:oldmouse=&mouse | set mouse=
+autocmd vimrc FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
 
 set undodir=~/.nvim/backups
 set undofile
@@ -227,6 +231,12 @@ function! s:VSetSearch()
   let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
   let @s = temp
   normal ``
+endfunction
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
 match Error /\s\+$/
@@ -268,3 +278,7 @@ endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
 set suffixesadd+=.js
+
+if has('nvim')
+  runtime! python_setup.vim
+endif

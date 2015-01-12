@@ -63,3 +63,5 @@
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 
+[hub]
+	host = git.corp.yahoo.com

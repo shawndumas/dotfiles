@@ -104,7 +104,7 @@ colorscheme flattown
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set complete=.,w,b,u,t,i
+set complete=.,w,b,u,t,i,kspell
 set directory=$HOME/.nvim/swapfiles//,.,~/tmp,/var/tmp,/tmp
 set expandtab
 set hidden
@@ -130,7 +130,7 @@ set showmatch
 set smartcase
 set smarttab
 set softtabstop=2
-set nospell
+set spell
 set spelllang=en_us
 set splitbelow
 set splitright

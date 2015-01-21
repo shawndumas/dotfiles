@@ -65,3 +65,6 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+export GITHUB_HOST=git.corp.yahoo.com
+eval "$(hub alias -s)"

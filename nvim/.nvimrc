@@ -158,6 +158,7 @@ nmap <leader>f :NERDTreeFind<cr>
 nmap <leader>p :CtrlP<cr>
 nmap <leader>r :CtrlPMRUFiles<cr>
 nmap <leader>e :Expand<cr>
+nmap <Leader>s :%!git stripspace<cr>
 
 if has("unix")
   let s:uname = system("uname")

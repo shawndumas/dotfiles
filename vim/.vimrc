@@ -130,7 +130,7 @@ set showmatch
 set smartcase
 set smarttab
 set softtabstop=2
-set spell
+set nospell
 set spelllang=en_us
 set splitbelow
 set splitright

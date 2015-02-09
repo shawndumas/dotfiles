@@ -138,7 +138,6 @@ set tabstop=2
 set title
 set ttimeout
 set ttimeoutlen=50
-set ttyfast
 set visualbell
 set wildignorecase
 set wildignore=log/**,node_modules/**,target/**,tmp/**

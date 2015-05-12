@@ -1,2 +1,6 @@
 *.DS_Store
 .ctrlp
+.agignore
+.projections.json
+.tern-project
+*.swp

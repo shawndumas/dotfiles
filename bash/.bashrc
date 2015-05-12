@@ -18,6 +18,7 @@ alias mv='mv -i'
 alias ls='ls -G'
 alias fn='find . -name'
 alias tmux='TERM=screen-256color-bce tmux'
+alias be='bundle exec'
 
 # the time has come...
 alias vim='nvim'
@@ -42,9 +43,7 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-if [ "$(type -P grunt)" ]; then
-   eval "$(grunt --completion=bash)"
-fi
+export PATH=~/homebrew/bin:$PATH
 
 if which brew >/dev/null 2>&1; then
   if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
@@ -63,12 +62,6 @@ fi
 . ~/.shell_prompt.sh
 . ~/.git-prompt.sh
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_65.jdk/Contents/Home
-
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-eval "$(hub alias -s)"
-
 export NVM_DIR="/Users/shawndumas/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+nvm use 0.12.2

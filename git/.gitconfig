@@ -33,6 +33,7 @@
   alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\"' && exit 0 || echo \"usage: git alias <new alias>\""
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 	unmerge = reset --merge ORIG_HEAD
+	stash-unapply = !git stash show -p | git apply -R
 
 [rerere]
   enabled = 1

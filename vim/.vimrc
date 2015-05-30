@@ -105,7 +105,7 @@ set autoindent
 set autoread
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,i,kspell
-set directory=$HOME/.vim/swapfiles//,.,~/tmp,/var/tmp,/tmp
+set directory=$HOME/.vim/backups/,~/tmp,/var/tmp,/tmp
 set expandtab
 set hidden
 set hlsearch
@@ -159,6 +159,8 @@ nmap <leader>p :CtrlP<cr>
 nmap <leader>r :CtrlPMRUFiles<cr>
 nmap <leader>e :Expand<cr>
 nmap <Leader>s :%!git stripspace<cr>
+nmap <Leader>h :ball<cr>
+nmap <Leader>v :vert ball<cr>
 
 if has("unix")
   let s:uname = system("uname")
@@ -204,6 +206,8 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+autocmd vimrc BufEnter *.scss setl filetype=text
 
 autocmd vimrc BufEnter *gitconfig setf gitconfig
 autocmd vimrc BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif

@@ -5,3 +5,4 @@
 .tern-project
 *.swp
 *.swo
+npm-shrinkwrap.json

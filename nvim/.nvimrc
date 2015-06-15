@@ -31,6 +31,7 @@ Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css', 'sass', 'less' ] }
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'mvolkmann/vim-js-arrow-function', { 'for': 'javascript' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'osyo-manga/vim-over'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -161,6 +162,7 @@ nmap <leader>e :Expand<cr>
 nmap <Leader>s :%!git stripspace<cr>
 nmap <Leader>h :ball<cr>
 nmap <Leader>v :vert ball<cr>
+nmap <Leader>= :JsAnonFnToArrowFn<cr><F5>
 
 if has("unix")
   let s:uname = system("uname")

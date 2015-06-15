@@ -34,6 +34,7 @@
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 	unmerge = reset --merge ORIG_HEAD
 	stash-unapply = !git stash show -p | git apply -R
+	pr = !sh -c 'stash pull-request $(git rev-parse --abbrev-ref HEAD) master @dwk @spaulo @yujunwu @dhudson'
 
 [rerere]
   enabled = 1

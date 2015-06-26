@@ -36,7 +36,7 @@
 	stash-unapply = !git stash show -p | git apply -R
 	pr = !sh -c 'stash pull-request $(git rev-parse --abbrev-ref HEAD) master @dwk @spaulo @yujunwu @dhudson'
 	new-push = "!sh -c 'git push 2>&1 | $(grep set-upstream)'"
-	purge = "!sh -c 'git pull && git prune-all && git br"
+	purge = "!sh -c 'git pull && git prune-all && git br'"
 
 [rerere]
   enabled = 1

@@ -34,7 +34,7 @@
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 	unmerge = reset --merge ORIG_HEAD
 	stash-unapply = !git stash show -p | git apply -R
-	pr = !sh -c 'stash pull-request $(git rev-parse --abbrev-ref HEAD) master @dwk @spaulo @yujunwu @dhudson'
+	pr = !sh -c 'stash pull-request $(git rev-parse --abbrev-ref HEAD) master @dwk @spaulo @yujunwu @dhudson @aprilcohen'
 	new-push = "!sh -c 'git push 2>&1 | $(grep set-upstream)'"
 	purge = "!sh -c 'git pull && git prune-all && git br'"
 

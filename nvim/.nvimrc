@@ -150,19 +150,21 @@ set nowrap
 vnoremap <silent> <Enter> :EasyAlign<Enter>
 nnoremap ? :<C-u>OverCommandLine<cr>
 
-nmap <leader>G :GundoToggle<cr>
-nmap <leader>P :CtrlPClearAllCaches<cr>:CtrlP<cr>
+nmap <Leader>= :JsAnonFnToArrowFn<cr><F5>
 nmap <leader>a :Ack<space>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>d :NERDTreeToggle<cr>
-nmap <leader>f :NERDTreeFind<cr>
-nmap <leader>p :CtrlP<cr>
-nmap <leader>r :CtrlPMRUFiles<cr>
 nmap <leader>e :Expand<cr>
-nmap <Leader>s :%!git stripspace<cr>
+nmap <leader>f :NERDTreeFind<cr>
+nmap <leader>G :GundoToggle<cr>
 nmap <Leader>h :ball<cr>
+nmap <leader>p :CtrlP<cr>
+nmap <leader>P :CtrlPClearAllCaches<cr>:CtrlP<cr>
+nmap <leader>r :CtrlPMRUFiles<cr>
+nmap <Leader>s :%!git stripspace<cr>
+nmap <Leader>t :sp term://bash<cr>
+nmap <Leader>tv :vsp term://bash<cr>
 nmap <Leader>v :vert ball<cr>
-nmap <Leader>= :JsAnonFnToArrowFn<cr><F5>
 
 if has("unix")
   let s:uname = system("uname")
@@ -192,6 +194,8 @@ map k gk
 
 xnoremap > >gv
 xnoremap < <gv
+
+tnoremap <Esc> <C-\><C-n>
 
 " plugin settings
 let g:ctrlp_match_window = 'order:ttb,max:20'

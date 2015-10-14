@@ -10,5 +10,3 @@ frontend/bower_components
 frontend/dist
 frontend/node_modules/
 frontend/tmp
-frontend/vendor
-vendor

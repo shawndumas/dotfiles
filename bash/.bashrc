@@ -64,4 +64,4 @@ fi
 
 export NVM_DIR="/Users/shawndumas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm use 0.12.2
+nvm use 0.12.7

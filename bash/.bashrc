@@ -53,8 +53,6 @@ if which brew >/dev/null 2>&1; then
   if [ -f "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh" ]; then
     . "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
   fi
-
-  eval "$(rbenv init -)"
 else
   . /etc/bash_completion.d/git
 fi
@@ -66,3 +64,5 @@ export NVM_DIR="/Users/shawndumas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 nvm use 0.12.7
 export PATH=$PATH:$HOME/Stash/wulfcli/src/bin
+
+export PATH="$PATH:$HOME/.rvm/bin"

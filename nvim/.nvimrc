@@ -26,7 +26,7 @@ Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-syntax'
 Plug 'kana/vim-textobj-user'
 Plug 'kien/ctrlp.vim'
-Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
+Plug 'marijnh/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css', 'sass', 'less' ] }
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
@@ -163,8 +163,8 @@ nmap <leader>p :CtrlP<cr>
 nmap <leader>P :CtrlPClearAllCaches<cr>:CtrlP<cr>
 nmap <leader>r :CtrlPMRUFiles<cr>
 nmap <Leader>s :%!git stripspace<cr>
-nmap <Leader>t :sp term://bash<cr>
-nmap <Leader>tv :vsp term://bash<cr>
+nmap <Leader>c :sp term://bash<cr>
+nmap <Leader>cv :vsp term://bash<cr>
 nmap <Leader>v :vert ball<cr>
 
 if has("unix")

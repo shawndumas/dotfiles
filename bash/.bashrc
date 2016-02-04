@@ -18,6 +18,7 @@ alias mv='mv -i'
 alias ls='ls -G'
 alias fn='find . -name'
 alias tmux='TERM=screen-256color-bce tmux'
+alias be='bundle exec'
 
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
@@ -39,21 +40,16 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-if [ "$(type -P grunt)" ]; then
-   eval "$(grunt --completion=bash)"
-fi
+export PATH=~/homebrew/bin:$PATH
 
 if which brew >/dev/null 2>&1; then
   if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
     . "$(brew --prefix)/etc/bash_completion"
-    . "$(brew --prefix)/etc/t-completion.sh"
   fi
 
   if [ -f "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh" ]; then
     . "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
   fi
-
-  eval "$(rbenv init -)"
 else
   . /etc/bash_completion.d/git
 fi

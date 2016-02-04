@@ -26,11 +26,12 @@ Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-syntax'
 Plug 'kana/vim-textobj-user'
 Plug 'kien/ctrlp.vim'
-Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
+Plug 'marijnh/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'css', 'sass', 'less' ] }
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'mvolkmann/vim-js-arrow-function', { 'for': 'javascript' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'osyo-manga/vim-over'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -40,6 +41,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
+Plug 'stephenway/postcss.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -66,6 +68,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamecollapse = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
+let g:airline_detect_crypt = 0
 let g:fugitive_github_domains = ['https://git.corp.yahoo.com']
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 16
@@ -105,7 +108,7 @@ set autoindent
 set autoread
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,i,kspell
-set directory=$HOME/.nvim/swapfiles//,.,~/tmp,/var/tmp,/tmp
+set directory=$HOME/.nvim/backups/,~/tmp,/var/tmp,/tmp
 set expandtab
 set hidden
 set hlsearch
@@ -138,7 +141,6 @@ set tabstop=2
 set title
 set ttimeout
 set ttimeoutlen=50
-set ttyfast
 set visualbell
 set wildignorecase
 set wildignore=log/**,node_modules/**,target/**,tmp/**
@@ -149,16 +151,21 @@ set nowrap
 vnoremap <silent> <Enter> :EasyAlign<Enter>
 nnoremap ? :<C-u>OverCommandLine<cr>
 
-nmap <leader>G :GundoToggle<cr>
-nmap <leader>P :CtrlPClearAllCaches<cr>:CtrlP<cr>
+nmap <Leader>= :JsAnonFnToArrowFn<cr><F5>
 nmap <leader>a :Ack<space>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>d :NERDTreeToggle<cr>
-nmap <leader>f :NERDTreeFind<cr>
-nmap <leader>p :CtrlP<cr>
-nmap <leader>r :CtrlPMRUFiles<cr>
 nmap <leader>e :Expand<cr>
+nmap <leader>f :NERDTreeFind<cr>
+nmap <leader>G :GundoToggle<cr>
+nmap <Leader>h :ball<cr>
+nmap <leader>p :CtrlP<cr>
+nmap <leader>P :CtrlPClearAllCaches<cr>:CtrlP<cr>
+nmap <leader>r :CtrlPMRUFiles<cr>
 nmap <Leader>s :%!git stripspace<cr>
+nmap <Leader>c :sp term://bash<cr>
+nmap <Leader>cv :vsp term://bash<cr>
+nmap <Leader>v :vert ball<cr>
 
 if has("unix")
   let s:uname = system("uname")
@@ -189,6 +196,8 @@ map k gk
 xnoremap > >gv
 xnoremap < <gv
 
+tnoremap <Esc> <C-\><C-n>
+
 " plugin settings
 let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:ctrlp_root_markers = ['.ctrlp']
@@ -204,6 +213,8 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+autocmd vimrc BufEnter *.scss setl filetype=text
 
 autocmd vimrc BufEnter *gitconfig setf gitconfig
 autocmd vimrc BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif

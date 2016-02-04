@@ -1,2 +1,12 @@
 *.DS_Store
 .ctrlp
+.agignore
+.projections.json
+.tern-project
+*.swp
+*.swo
+npm-shrinkwrap.json
+frontend/bower_components
+frontend/dist
+frontend/node_modules/
+frontend/tmp

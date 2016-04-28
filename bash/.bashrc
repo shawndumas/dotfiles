@@ -12,6 +12,7 @@ export GIT_EDITOR=vim
 export VISUAL=vim
 export EDITOR=vim
 
+alias t='git '
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -62,7 +63,7 @@ fi
 
 export NVM_DIR="/Users/shawndumas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm use 0.12.7
+nvm use 4.3.1
 export PATH=$PATH:$HOME/Stash/wulfcli/src/bin
 
 export PATH="$PATH:$HOME/.rvm/bin"

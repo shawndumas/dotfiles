@@ -63,7 +63,7 @@ fi
 
 export NVM_DIR="/Users/shawndumas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm use 4.3.1
+nvm use 4.4.3
 export PATH=$PATH:$HOME/Stash/wulfcli/src/bin
 
 export PATH="$PATH:$HOME/.rvm/bin"

@@ -5,12 +5,9 @@
 .tern-project
 *.swp
 *.swo
-frontend/bower_components
-frontend/dist
-frontend/node_modules/
-frontend/tmp
 src/frontend/public/assets/stylesheets/app-next.css.map
 src/frontend/bower_components
 src/frontend/dist
 src/frontend/node_modules/
+node_modules/
 src/frontend/tmp

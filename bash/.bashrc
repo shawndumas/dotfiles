@@ -44,7 +44,7 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-export PATH=~/homebrew/bin:$PATH
+export PATH=${HOME}/.homebrew/bin:${PATH}
 
 if which brew >/dev/null 2>&1; then
   if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
@@ -63,7 +63,7 @@ fi
 
 export NVM_DIR="/Users/shawndumas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm use 4.4.3
+nvm use 6.7.0
 export PATH=$PATH:$HOME/Stash/wulfcli/src/bin
 
 export PATH="$PATH:$HOME/.rvm/bin"

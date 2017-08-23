@@ -28,8 +28,6 @@ export HISTTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-export HOMEBREW_GITHUB_API_TOKEN="16af22536b6402d71d794e65ed1ed2a240284846"
-
 export PATH=${HOME}/homebrew/bin:${PATH}
 [ -f ${HOME}/homebrew/etc/bash_completion ] && . ${HOME}/homebrew/etc/bash_completion
 

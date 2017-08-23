@@ -22,6 +22,7 @@
   s = status -s
   st = status
   ci = commit
+  cp = cherry-pick
   br = branch
   co = checkout
   rc = rebase --continue

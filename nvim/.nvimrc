@@ -170,7 +170,7 @@ nmap <Leader>v :vert ball<cr>
 if has("unix")
   let s:uname = system("uname")
   if s:uname == "Darwin\n"
-    nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
+    nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
   endif
 endif
 
